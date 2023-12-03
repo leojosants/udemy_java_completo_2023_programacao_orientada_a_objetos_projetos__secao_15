@@ -11,7 +11,7 @@ public class Reservation {
 	private Integer room_number;
 	private Date check_in;
 	private Date check_out;
-	private static SimpleDateFormat simple_date_format = new SimpleDateFormat("dd/MM/aaaa");
+	private static SimpleDateFormat simple_date_format = new SimpleDateFormat("dd/MM/yyyy");
 
 	/*
 	 * constructors section
@@ -70,13 +70,13 @@ public class Reservation {
 	public String toString() {
 		StringBuilder string_builder = new StringBuilder();
 		string_builder.append(String.format("Quarto %d, ", this.getRoomNumber()));
-		string_builder.append(String.format("entrada ..: %s, ", simple_date_format.format(this.getCheckIn())));
-		string_builder.append(String.format("saída ..: %s, ", simple_date_format.format(this.getCheckOut())));
-		string_builder.append(String.format("%l noites", this.duration()));
+		string_builder.append(String.format("entrada: %s, ", simple_date_format.format(this.getCheckIn())));
+		string_builder.append(String.format("saída: %s, ", simple_date_format.format(this.getCheckOut())));
+		string_builder.append(String.format("%d noites", this.duration()));
 		return string_builder.toString();
 	}
 	
 	public void displayReservation() {
-		System.out.println(toString());
+		System.out.printf(" Reserva: %s", toString());
 	}
 }
