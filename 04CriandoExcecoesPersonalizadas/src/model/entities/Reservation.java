@@ -61,9 +61,20 @@ public class Reservation {
 		return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 	}
 	
-	public void updateDate(Date check_in, Date check_out) {
+	public String updateDate(Date check_in, Date check_out) {
+		Date now = new Date();
+		
+		if(check_in.before(now) || check_out.before(now)) {
+			return "-> As datas de reserva para atualização devem ser datas futuras";
+		}
+		
+		if(!check_out.after(check_in)) {
+			return "-> A data de check-out deve ser posterior à data de check-in";
+		}
+		
 		this.setCheckIn(check_in);
 		this.setCheckOut(check_out);
+		return null;
 	}
 
 	@Override
@@ -77,6 +88,6 @@ public class Reservation {
 	}
 	
 	public void displayReservation() {
-		System.out.printf(" Reserva: %s", toString());
+		System.out.printf("Reserva: %s", toString());
 	}
 }

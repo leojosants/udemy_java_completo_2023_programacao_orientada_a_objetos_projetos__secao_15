@@ -36,25 +36,21 @@ public class Program {
 			reservation.displayReservation();
 			
 			System.out.println("\n\n----- Entre com os dados para atualizar reserva -----");
-			System.out.print(" Data de entrada [dd/MM/yyyy] ..: ");
+			System.out.print("Data de entrada [dd/MM/yyyy] ..: ");
 			check_in_string = scanner.nextLine().trim();
 			check_in = simple_date_format.parse(check_in_string);
 			
 			System.out.print("Data de saída [dd/MM/yyyy] ..: ");
 			check_out_string = scanner.nextLine().trim();
 			check_out = simple_date_format.parse(check_out_string);
+							
+			String error = reservation.updateDate(check_in, check_out);
 			
-			Date now = new Date();
-						
-			if(check_in.before(now) || check_out.before(now)) {
-				System.out.println("-> Erro na reserva: As datas de reserva para atualização devem ser datas futuras");
+			if(error != null) {
+				System.out.printf("Erro na reserva: %s", error);
 			}
-			else if(!check_out.after(check_in)) {
-				System.out.println("-> Erro na reserva: A data de check-out deve ser posterior à data de check-in");
-			}
-			else {				
-				reservation.updateDate(check_in, check_out);
-				reservation.displayReservation();
+			else {
+				reservation.displayReservation();				
 			}
 		}
 		
